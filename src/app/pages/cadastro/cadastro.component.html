@@ -5,37 +5,38 @@
     <h2 class='text-slate-900 text-5xl'>Cadastrar</h2>
     <div class="flex flex-col w-full">
       <label htmlFor="nome">Nome</label>
-      <input type="text" id="nome" name="nome" placeholder="Nome" class="border-2 border-slate-700 rounded p-2" />
+      <input [(ngModel)]='usuario.nome' type="text" id="nome" name="nome" placeholder="Nome"
+        class="border-2 border-slate-700 rounded p-2" />
     </div>
     <div class="flex flex-col w-full">
       <label htmlFor="usuario">Usuario</label>
-      <input type="text" id="usuario" name="usuario" placeholder="Usuario"
+      <input [(ngModel)]='usuario.usuario' type="text" id="usuario" name="usuario" placeholder="Usuario"
         class="border-2 border-slate-700 rounded p-2" />
     </div>
     <div class="flex flex-col w-full">
       <label htmlFor="foto">Foto</label>
-      <input type="text" id="foto" name="foto" placeholder="Foto" class="border-2 border-slate-700 rounded p-2" />
+      <input [(ngModel)]='usuario.foto' type="text" id="foto" name="foto" placeholder="Foto"
+        class="border-2 border-slate-700 rounded p-2" />
     </div>
     <div class="flex flex-col w-full">
       <label htmlFor="senha">Senha</label>
-      <input type="password" id="senha" name="senha" placeholder="Senha"
+      <input [(ngModel)]='usuario.senha' type="password" id="senha" name="senha" placeholder="Senha"
         class="border-2 border-slate-700 rounded p-2" />
     </div>
     <div class="flex flex-col w-full">
       <label htmlFor="confirmarSenha">Confirmar Senha</label>
-      <input type="password" id="confirmarSenha" name="confirmarSenha" placeholder="Confirmar Senha"
-        class="border-2 border-slate-700 rounded p-2" />
+      <input (input)='confirmarSenha($event)' type="password" id="confirmarSenha" name="confirmarSenha"
+        placeholder="Confirmar Senha" class="border-2 border-slate-700 rounded p-2" />
     </div>
     <div class="flex justify-around w-full gap-8">
       <button class='rounded text-white bg-red-400
-                  hover:bg-red-700 w-1/2 py-2'
-                  routerLink='/'>
+                  hover:bg-red-700 w-1/2 py-2' routerLink='/'>
         Cancelar
       </button>
       <button type='submit' class='rounded text-white bg-indigo-400
                            hover:bg-indigo-900 w-1/2 py-2
-                           flex justify-center'>
-        Cadastrar
+                           flex justify-center' (click)='cadastrar()'>
+        {{ isLoading ? 'Loading' : 'Cadastrar'}}
       </button>
     </div>
   </form>
