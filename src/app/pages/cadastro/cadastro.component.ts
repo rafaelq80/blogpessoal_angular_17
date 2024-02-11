@@ -1,19 +1,19 @@
+import { CommonModule } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { NgxSpinnerModule } from 'ngx-spinner';
 import { UsuarioService } from '../../services/usuario.service';
 import { Usuario } from './../../models/Usuario';
-import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
   selector: 'app-cadastro',
   standalone: true,
   imports: [
+    CommonModule,
     RouterLink,
-    FormsModule,
-    NgxSpinnerModule
+    FormsModule
   ],
   providers: [
     UsuarioService
@@ -48,13 +48,24 @@ export class CadastroComponent implements OnInit {
     if (this.usuario.senha === this.confirmaSenha && this.usuario.senha.length >= 8) {
 
       this.isLoading = true
-
-        this.usuarioService.cadastrar(this.usuario).subscribe((resposta: Usuario) => {
-          this.usuario = resposta
-          this.router.navigate([''])
-          alert("Usuário Cadastrado com Sucesso")
-        })
-
+      console.log(this.isLoading)
+      this.usuarioService.cadastrar(this.usuario)
+        .subscribe({
+          next: (resposta: Usuario) => {
+            this.usuario = resposta
+            this.router.navigate([''])
+            alert("Usuário Cadastrado com Sucesso")
+          },
+          error: (error: HttpErrorResponse) => {
+            switch (error.status) {
+              case 400:
+                alert('Erro de Validação!')
+                break;
+              default:
+                alert('Erro no Cadastro do Usuário')
+            }
+          }
+        });
     } else {
       alert('Dados estão inconsistentes. Verifique as informações do cadastro')
       this.usuario.senha = ''

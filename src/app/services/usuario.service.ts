@@ -1,5 +1,5 @@
 ﻿import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Observable, catchError, throwError } from 'rxjs';
 import { UsuarioLogin } from './../models/UsuarioLogin'
 import { Usuario } from '../models/Usuario';
@@ -13,11 +13,10 @@ export class UsuarioService {
   cadastrar(usuario: Usuario): Observable<Usuario>{
     return this.http.post<Usuario>(`${this.urlDeploy}/usuarios/cadastrar`, usuario)
     .pipe(
-      catchError((error) => {
-          console.error(error);
+      catchError((error: HttpErrorResponse) => {
           return throwError(() => error);
-      }
-      ))
+      })
+      )
   }
 
   login(usuarioLogin: UsuarioLogin): Observable<UsuarioLogin>{
