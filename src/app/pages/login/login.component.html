@@ -4,16 +4,16 @@
     <h2 class="text-slate-900 text-5xl ">Entrar</h2>
     <div class="flex flex-col w-full">
       <label htmlFor="usuario">Usuário</label>
-      <input type="text" id="usuario" name="usuario" placeholder="Usuario"
+      <input [(ngModel)]='usuarioLogin.usuario' type="text" id="usuario" name="usuario" placeholder="Usuario"
         class="border-2 border-slate-700 rounded p-2" />
     </div>
     <div class="flex flex-col w-full">
       <label htmlFor="senha">Senha</label>
-      <input type="password" id="senha" name="senha" placeholder="Senha"
+      <input [(ngModel)]='usuarioLogin.senha' type="password" id="senha" name="senha" placeholder="Senha"
         class="border-2 border-slate-700 rounded p-2" />
     </div>
     <button type='submit' class="rounded bg-indigo-400 flex justify-center
-                                   hover:bg-indigo-900 text-white w-1/2 py-2">
+                                   hover:bg-indigo-900 text-white w-1/2 py-2" (click)='logar()'>
       <span>Entrar</span>
     </button>
 
