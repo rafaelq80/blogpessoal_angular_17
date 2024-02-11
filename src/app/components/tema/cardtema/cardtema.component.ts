@@ -8,15 +8,13 @@ import { Tema } from '../../../models/Tema';
   templateUrl: './cardtema.component.html',
   styleUrl: './cardtema.component.css'
 })
-export class CardtemaComponent  implements OnInit {
+export class CardtemaComponent implements OnInit {
 
   @Input() tema: Tema;
 
   constructor() { }
 
   ngOnInit(): void {
-
-    console.log(this.tema)
 
   }
 
