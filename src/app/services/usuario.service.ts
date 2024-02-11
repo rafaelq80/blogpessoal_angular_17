@@ -6,9 +6,10 @@ import { Usuario } from '../models/Usuario';
 
 @Injectable()
 export class UsuarioService {
-  constructor(private http: HttpClient) { }
 
- urlDeploy: string = 'http://localhost:8080'
+  urlDeploy: string = 'http://localhost:8080'
+
+  constructor(private http: HttpClient) { }
 
   cadastrar(usuario: Usuario): Observable<Usuario>{
     return this.http.post<Usuario>(`${this.urlDeploy}/usuarios/cadastrar`, usuario)
