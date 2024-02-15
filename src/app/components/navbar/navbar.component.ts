@@ -30,12 +30,6 @@ export class NavbarComponent implements OnInit {
     environment.token = ''
     this.router.navigate(['/'])
 
-    // console.log(environment.id)
-    // console.log(environment.nome)
-    // console.log(environment.usuario)
-    // console.log(environment.senha)
-    // console.log(environment.foto)
-    // console.log(environment.token)
   }
 
 }

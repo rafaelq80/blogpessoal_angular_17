@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
-import { UsuarioLogin } from '../../models/UsuarioLogin';
-import { UsuarioService } from '../../services/usuario.service';
-import { environment } from '../../../environments/environment';
-import { HttpErrorResponse } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router, RouterLink } from '@angular/router';
+import { environment } from '../../../environments/environment';
+import { UsuarioLogin } from '../../models/UsuarioLogin';
+import { AlertService } from '../../services/alert.service';
+import { UsuarioService } from '../../services/usuario.service';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +29,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private usuarioService: UsuarioService,
-    private router: Router
+    private router: Router,
+    private alertService: AlertService
   ) { }
 
   ngOnInit() {
@@ -49,25 +51,19 @@ export class LoginComponent implements OnInit {
           environment.foto = this.usuarioLogin.foto
           environment.token = this.usuarioLogin.token
 
-          // console.log(environment.id)
-          // console.log(environment.nome)
-          // console.log(environment.usuario)
-          // console.log(environment.senha)
-          // console.log(environment.foto)
-          // console.log(environment.token)
-
+          this.alertService.sucesso('','Usuário Autenticado com Sucesso!')
           this.router.navigate(['/home'])
         },
         error: (error: HttpErrorResponse) => {
           switch (error.status) {
             case 400:
-              alert('Erro de Validação!')
+              this.alertService.erro('','Erro de Validação!')
               break;
             case 401:
-              alert('Usuário e/ou Senha inválidos!')
+              this.alertService.erro('','Usuário e/ou Senha inválidos!')
               break;
             default:
-              alert('Erro ao Autenticar o Usuário')
+              this.alertService.erro('','Erro ao Autenticar o Usuário')
           }
         }
       })

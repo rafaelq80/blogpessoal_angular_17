@@ -10,6 +10,7 @@ import { Tema } from '../models/Tema';
 export class TemaService {
 
   urlDeploy: string = 'http://localhost:8080'
+  //urlDeploy: string = 'https://blogpessoal.onrender.com'
 
   constructor(private http: HttpClient) { }
 

@@ -1,23 +1,31 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from './components/footer/footer.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { CadastroComponent } from "./pages/cadastro/cadastro.component";
+import { UsuarioService } from './services/usuario.service';
+import { NgxLoadingModule } from 'ngx-loading';
 
 @Component({
-    selector: 'app-root',
-    standalone: true,
-    templateUrl: './app.component.html',
-    styleUrl: './app.component.css',
-    imports: [
-        RouterOutlet,
-        FormsModule,
-        NavbarComponent,
-        FooterComponent,
-        CadastroComponent
-    ]
+  selector: 'app-root',
+  standalone: true,
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+  imports: [
+    CommonModule,
+    RouterOutlet,
+    NavbarComponent,
+    FooterComponent,
+  ],
+  providers: [
+    UsuarioService
+  ]
 })
 export class AppComponent {
   title = 'blogpessoal';
+
+  constructor(
+    public usuario: UsuarioService
+  ) { }
+
 }

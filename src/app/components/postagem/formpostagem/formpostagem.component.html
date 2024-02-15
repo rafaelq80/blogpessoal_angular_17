@@ -1,0 +1,31 @@
+<div class="container flex flex-col mx-auto items-center my-4">
+  <h1 class="text-4xl text-center my-8">
+    {{ postagemId !== undefined ? 'Editar Postagem' : 'Cadastrar Postagem' }}
+  </h1>
+
+  <form class="flex flex-col w-1/2 gap-4">
+
+    <div class="flex flex-col gap-2">
+      <label htmlFor="titulo">Título da Postagem</label>
+      <input [(ngModel)]="this.postagem.titulo" type="text" placeholder="Titulo" name="titulo"
+        class="border-2 border-slate-700 rounded p-2" required minLength={5} maxLength={100} />
+    </div>
+    <div class="flex flex-col gap-2">
+      <label htmlFor="texto">Texto da Postagem</label>
+      <input [(ngModel)]="this.postagem.texto" type="text" placeholder="Texto" name="texto"
+        class="border-2 border-slate-700 rounded p-2" required minLength={10} maxLength={1000} />
+    </div>
+    <div class="flex flex-col gap-2">
+      <p>Tema da Postagem</p>
+      <select [(ngModel)]="temaId" (change)="getTemaById()" name="tema" id="tema"
+        class='border p-2 border-slate-800 rounded'>
+        <option *ngFor="let tema of listaTemas" value="{{tema.id}}">{{tema.descricao}}</option>
+      </select>
+    </div>
+    <button (click)="cadastrarPostagem()" [disabled]="hasTema()" type='submit' class='rounded disabled:bg-slate-200 bg-indigo-400
+                  hover:bg-indigo-800 text-white font-bold w-1/2
+                  mx-auto py-2 flex justify-center'>
+      <span>{{ postagemId !== undefined ? 'Atualizar' : 'Cadastrar' }}</span>
+    </button>
+  </form>
+</div>

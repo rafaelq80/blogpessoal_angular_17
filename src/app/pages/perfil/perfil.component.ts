@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { environment } from '../../../environments/environment';
+import { AlertService } from '../../services/alert.service';
 
 @Component({
   selector: 'app-perfil',
   standalone: true,
   imports: [],
+  providers:[],
   templateUrl: './perfil.component.html',
   styleUrl: './perfil.component.css'
 })
@@ -18,11 +21,12 @@ export class PerfilComponent implements OnInit {
 
   constructor(
     private router: Router,
+    private alertService: AlertService
   ) { }
 
   ngOnInit() {
     if (environment.token == '') {
-      alert("Token Inválido!")
+      this.alertService.info('','Token Inválido!')
       this.router.navigate(['/'])
     }
   }

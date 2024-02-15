@@ -6,7 +6,7 @@
                     <img src={{postagem.usuario.foto}}
                          class='h-12 rounded-full' alt={{postagem.usuario.nome}} />
                     <h3 class='text-lg font-bold text-center uppercase'>
-                        Nome do Usuário
+                      {{postagem.usuario.nome}}
                     </h3>
                 </div>
                 <div class='p-4 '>
@@ -17,11 +17,11 @@
                 </div>
             </div>
             <div class="flex">
-                <a routerLink='' class='w-full text-white bg-indigo-400
+                <a [routerLink]="['/editarpostagem', postagem.id]" class='w-full text-white bg-indigo-400
                     hover:bg-indigo-800 flex items-center justify-center py-2'>
                     <button>Editar</button>
                 </a>
-                <a routerLink='' class='text-white bg-red-400
+                <a [routerLink]="['/deletarpostagem', postagem.id]" class='text-white bg-red-400
                     hover:bg-red-700 w-full flex items-center justify-center'>
                     <button>Deletar</button>
                 </a>

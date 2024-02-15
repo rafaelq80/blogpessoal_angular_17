@@ -6,6 +6,7 @@ import { Tema } from '../../../models/Tema';
 import { PostagemService } from '../../../services/postagem.service';
 import { CardpostagemComponent } from "../cardpostagem/cardpostagem.component";
 import { CommonModule } from '@angular/common';
+import { AlertService } from '../../../services/alert.service';
 
 @Component({
   selector: 'app-listarpostagens',
@@ -23,13 +24,14 @@ export class ListarpostagensComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private postagemService: PostagemService
+    private postagemService: PostagemService,
+    private alertService: AlertService
   ) { }
 
   ngOnInit() {
 
     if (environment.token == '') {
-      alert("Token Inválido!")
+      this.alertService.info('',"Token Inválido!")
       this.router.navigate(['/'])
     }
 

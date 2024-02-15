@@ -1,10 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Tema } from '../../../models/Tema';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-cardtema',
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './cardtema.component.html',
   styleUrl: './cardtema.component.css'
 })

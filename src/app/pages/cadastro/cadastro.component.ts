@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { UsuarioService } from '../../services/usuario.service';
 import { Usuario } from './../../models/Usuario';
+import { AlertService } from '../../services/alert.service';
 
 
 @Component({
@@ -29,7 +30,8 @@ export class CadastroComponent implements OnInit {
 
   constructor(
     private usuarioService: UsuarioService,
-    private router: Router
+    private router: Router,
+    private alertService: AlertService
   ) { }
 
   ngOnInit(): void {
@@ -43,7 +45,7 @@ export class CadastroComponent implements OnInit {
   cadastrar() {
 
     if (this.usuario.senha === undefined)
-      alert('A Senha é Obrigatória!')
+      this.alertService.info('', 'A Senha é Obrigatória!')
 
     if (this.usuario.senha === this.confirmaSenha && this.usuario.senha.length >= 8) {
 
@@ -54,15 +56,15 @@ export class CadastroComponent implements OnInit {
           next: (resposta: Usuario) => {
             this.usuario = resposta
             this.router.navigate([''])
-            alert("Usuário Cadastrado com Sucesso")
+            this.alertService.sucesso('',"Usuário Cadastrado com Sucesso")
           },
           error: (error: HttpErrorResponse) => {
             switch (error.status) {
               case 400:
-                alert('Erro de Validação!')
+                this.alertService.erro('','Erro de Validação!')
                 break;
               default:
-                alert('Erro no Cadastro do Usuário')
+                this.alertService.erro('','Erro no Cadastro do Usuário')
             }
           }
         });

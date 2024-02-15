@@ -1,0 +1,21 @@
+<div class="container flex flex-col items-center justify-center mx-auto">
+  <h1 class="text-4xl text-center my-8">
+    {{ temaId === undefined ? 'Cadastrar Tema' : 'Atualizar Tema'}}
+  </h1>
+
+  <form class="w-1/2 flex flex-col gap-4">
+    <div class="flex flex-col gap-2">
+      <label htmlFor="descricao">Descrição do Tema</label>
+      <input [(ngModel)]='tema.descricao' type="text" placeholder="Descreva aqui seu tema" name='descricao'
+        class="border-2 border-slate-700 rounded p-2" />
+    </div>
+    <button class="rounded text-slate-100 bg-indigo-400
+                     hover:bg-indigo-800 w-1/2 py-2 mx-auto flex justify-center" type="submit" (click)='submitTema()'>
+
+      <span>
+        {{ temaId === undefined ? 'Cadastrar' : 'Atualizar'}}
+      </span>
+
+    </button>
+  </form>
+</div>
