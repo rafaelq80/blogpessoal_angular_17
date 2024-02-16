@@ -1,3 +1,5 @@
+<div class="flex justify-center w-full my-4 ">
+  <ng-template #customLoadingTemplate></ng-template>
 <div class='container mx-auto my-4
                 grid grid-cols-1 md:grid-cols-2
             	lg:grid-cols-3 gap-4'>
@@ -6,3 +8,10 @@
               >
             </app-cardpostagem>
 </div>
+</div>
+
+<ngx-loading
+  [show]="isLoading"
+  [template]="customLoadingTemplate"
+  >
+</ngx-loading>

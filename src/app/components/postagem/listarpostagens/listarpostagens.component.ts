@@ -7,6 +7,8 @@ import { PostagemService } from '../../../services/postagem.service';
 import { CardpostagemComponent } from "../cardpostagem/cardpostagem.component";
 import { CommonModule } from '@angular/common';
 import { AlertService } from '../../../services/alert.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { NgxLoadingModule } from 'ngx-loading';
 
 @Component({
   selector: 'app-listarpostagens',
@@ -15,12 +17,15 @@ import { AlertService } from '../../../services/alert.service';
   styleUrl: './listarpostagens.component.css',
   imports: [
     CardpostagemComponent,
-    CommonModule],
+    CommonModule,
+    NgxLoadingModule,
+  ],
   providers: [PostagemService]
 })
 export class ListarpostagensComponent implements OnInit {
 
   postagens: Postagem[]
+  isLoading: boolean = true;
 
   constructor(
     private router: Router,
@@ -39,8 +44,27 @@ export class ListarpostagensComponent implements OnInit {
   }
 
   findAll() {
-    this.postagemService.getAll().subscribe((resposta: Postagem[]) => {
+    this.postagemService.getAll().subscribe({
+      next:(resposta: Postagem[]) => {
       this.postagens = resposta
-    })
-  }
+      this.isLoading = false
+    },
+    error: (error: HttpErrorResponse) => {
+      switch (error.status) {
+        case 401:
+          this.alertService.erro('', 'Acesso Negado!')
+          this.isLoading = false
+          break;
+        case 403:
+          this.alertService.erro('', 'Token Inválido!')
+          this.router.navigate([''])
+          break;
+        default:
+          this.alertService.erro('', 'Erro ao Listar Tema')
+          this.isLoading = false
+      }
+    }
+  })
+
+}
 }

@@ -29,7 +29,14 @@ export const appConfig: ApplicationConfig = {
       enableClose: true,
       backdrop: true,
       }),
-      
+      importProvidersFrom(NgxLoadingModule.forRoot({
+        animationType: ngxLoadingAnimationTypes.circleSwish,
+        backdropBackgroundColour: "rgba(0,0,0,0.1)",
+        backdropBorderRadius: "4px",
+        primaryColour: "#312e81",
+        secondaryColour: "#ffffff",
+        tertiaryColour: "#ffffff",
+      }))
   ]
 };
 

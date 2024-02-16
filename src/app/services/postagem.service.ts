@@ -9,8 +9,8 @@ import { Postagem } from '../models/Postagem';
 })
 export class PostagemService {
 
-  urlDeploy: string = 'http://localhost:8080'
-
+  urlDeploy: string = environment.api
+  
   constructor(private http: HttpClient) { }
 
   token = {

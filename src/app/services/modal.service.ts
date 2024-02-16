@@ -5,7 +5,9 @@
 import { DialogRef, DialogService } from '@ngneat/dialog';
 import { FormpostagemComponent } from '../components/postagem/formpostagem/formpostagem.component';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ModalService {
 
   private dialog = inject(DialogService);

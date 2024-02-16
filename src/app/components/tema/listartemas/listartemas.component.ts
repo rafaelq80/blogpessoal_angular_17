@@ -22,7 +22,6 @@ import { HttpErrorResponse } from '@angular/common/http';
   providers:[TemaService]
 })
 export class ListartemasComponent implements OnInit {
-[x: string]: any;
 
 temas: Tema[]
 isLoading: boolean = true;

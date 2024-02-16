@@ -5,17 +5,19 @@ import { UsuarioLogin } from './../models/UsuarioLogin'
 import { Usuario } from '../models/Usuario';
 import { environment } from '../../environments/environment';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class UsuarioService {
 
-  urlDeploy: string = 'http://localhost:8080'
+  urlDeploy: string = environment.api
 
   constructor(private http: HttpClient) { }
 
   token = {
     headers: new HttpHeaders().set('Authorization', environment.token)
   }
-  
+
   cadastrar(usuario: Usuario): Observable<Usuario>{
     return this.http.post<Usuario>(`${this.urlDeploy}/usuarios/cadastrar`, usuario)
     .pipe(

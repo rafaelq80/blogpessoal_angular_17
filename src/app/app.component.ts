@@ -4,7 +4,6 @@ import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from './components/footer/footer.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { UsuarioService } from './services/usuario.service';
-import { NgxLoadingModule } from 'ngx-loading';
 
 @Component({
   selector: 'app-root',
