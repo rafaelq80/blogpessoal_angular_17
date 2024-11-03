@@ -6,5 +6,5 @@ export const environment = {
   senha: '',
   foto: '',
   token: '',
-  api: 'https://blogpessoal-z837.onrender.com',
+  api: 'https://blogpessoal-nest-qz4t.onrender.com',
 };

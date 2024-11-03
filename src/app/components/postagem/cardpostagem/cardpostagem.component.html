@@ -13,7 +13,7 @@
                     <h4 class='text-lg font-semibold uppercase'>{{postagem.titulo}}</h4>
                     <p>{{postagem.texto}}</p>
                     <p>Tema: {{postagem.tema.descricao}}</p>
-                    <p>Data: {{postagem.data | date: "EEEE, d 'de' MMMM 'de' yyyy 'às' h:mm:ss"}}</p>
+                    <p>Data: {{ getFormattedDate(postagem.data) }}</p>
                 </div>
             </div>
             <div class="flex">

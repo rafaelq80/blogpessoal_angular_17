@@ -22,10 +22,10 @@
         <option *ngFor="let tema of listaTemas" value="{{tema.id}}">{{tema.descricao}}</option>
       </select>
     </div>
-    <button (click)="cadastrarPostagem()" [disabled]="hasTema()" type='submit' class='rounded disabled:bg-slate-200 bg-indigo-400
+    <button (click)="submitPostagem()" [disabled]="hasTema()" type='submit' class='rounded disabled:bg-slate-200 bg-indigo-400
                   hover:bg-indigo-800 text-white font-bold w-1/2
                   mx-auto py-2 flex justify-center'>
-      <span>{{ postagemId !== undefined ? 'Atualizar' : 'Cadastrar' }}</span>
+      <span>{{ postagemId ? 'Atualizar' : 'Cadastrar' }}</span>
     </button>
   </form>
 </div>

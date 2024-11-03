@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Optional } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DialogService } from '@ngneat/dialog';
+import { DialogRef, DialogService } from '@ngneat/dialog';
 import { environment } from '../../../../environments/environment';
 import { Postagem } from '../../../models/Postagem';
 import { Tema } from '../../../models/Tema';
@@ -49,7 +49,8 @@ export class FormpostagemComponent implements OnInit {
     private postagemService: PostagemService,
     private temaService: TemaService,
     private usuarioService: UsuarioService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    @Optional() public ref: DialogRef
   ) { }
 
   ngOnInit() {
@@ -61,7 +62,7 @@ export class FormpostagemComponent implements OnInit {
 
     this.postagemId = this.route.snapshot.params['id']
 
-    if (this.postagemId !== undefined) {
+    if (this.postagemId) {
       this.getPostagemById()
     }
 
@@ -71,6 +72,7 @@ export class FormpostagemComponent implements OnInit {
   getPostagemById() {
     this.postagemService.getById(this.postagemId).subscribe((resposta: Postagem) => {
       this.postagem = resposta
+      this.temaId = resposta.tema.id
     })
   }
 
@@ -105,6 +107,9 @@ export class FormpostagemComponent implements OnInit {
       next: (resposta: Postagem) => {
         this.postagem = resposta;
         this.alertService.sucesso('', 'Postagem Cadastrada com sucesso!')
+        if (this.ref) {
+          this.ref.close();
+        }
         this.router.navigate(['/postagens'])
       },
       error: (error: HttpErrorResponse) => {
@@ -138,6 +143,9 @@ export class FormpostagemComponent implements OnInit {
       next: (resposta: Postagem) => {
         this.postagem = resposta;
         this.alertService.sucesso('', 'Postagem Atualizada com sucesso!')
+        if (this.ref) {
+          this.ref.close();
+        }
         this.router.navigate(['/postagens'])
       },
       error: (error: HttpErrorResponse) => {
@@ -158,10 +166,11 @@ export class FormpostagemComponent implements OnInit {
   }
 
   submitPostagem(){
-    if (this.postagemId === undefined){
-      this.cadastrarPostagem()
-    }else{
+
+    if (this.postagem.id) {
       this.atualizarPostagem()
+    } else {
+      this.cadastrarPostagem()
     }
   }
 

@@ -53,7 +53,7 @@ export class DeletarpostagemComponent implements OnInit {
   deletarPostagem() {
     this.postagemService.delete(this.postagemId).subscribe({
       next: () => {
-        this.alertService.sucesso('', 'postagem apagado com sucesso!')
+        this.alertService.sucesso('', 'postagem apagada com sucesso!')
         this.router.navigate(['/postagens'])
       },
       error: (error: HttpErrorResponse) => {
